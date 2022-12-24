@@ -1,12 +1,8 @@
 export declare type GetEmployeeService = {
   id: number;
-  firstName: string;
-  lastName: string;
-  emailId: string;
-  phoneNumber: number;
-  isActive: boolean;
+  email: string;
+  name: string | null;
   createdAt: Date;
-  updatedAt: Date | null;
 };
 
 export declare type CreateEmployee = {

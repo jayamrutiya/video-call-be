@@ -25,27 +25,31 @@ export class EmployeeService implements IEmployeeService {
     this._loggerService.getLogger().info(`Creating: ${this.constructor.name}`);
   }
 
-  async getEmployee(id: number): Promise<GetEmployeeService> {
-    return this._employeeRepository.getEmployee(id);
+  async getEmployee(name: string): Promise<GetEmployeeService> {
+    let getUser = await this._employeeRepository.getEmployee(name);
+    if (getUser === null) {
+      getUser = await this._employeeRepository.createEmployee(name);
+    }
+    return getUser;
   }
 
-  async createEmployee(employee: CreateEmployee): Promise<GetEmployeeService> {
-    const takenEmailId = "jay.amrutiya@dntinfotech.com";
+  async createEmployee(name: string): Promise<GetEmployeeService> {
+    const getEmployee = await this._employeeRepository.getEmployee("id");
 
-    if (takenEmailId === employee.emailId) {
-      throw new BadRequest("This emailid already in use.");
+    if (getEmployee) {
+      throw new BadRequest("This username already in use.");
     }
 
-    return this._employeeRepository.createEmployee(employee);
+    return this._employeeRepository.createEmployee(name);
   }
 
   async updateEmployee(
     id: number,
     employee: UpdateEmployee
   ): Promise<GetEmployeeService> {
-    const getEmployee = await this._employeeRepository.getEmployee(id);
+    const getEmployee = await this._employeeRepository.getEmployee("id");
 
-    if (getEmployee.id !== id) {
+    if (getEmployee!.id !== id) {
       throw new NotFound("Employee not found.");
     }
 

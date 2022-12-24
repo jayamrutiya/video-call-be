@@ -5,9 +5,9 @@ import {
 } from "../types/Employee";
 
 export interface IEmployeeService {
-  getEmployee(id: number): Promise<GetEmployeeService>;
+  getEmployee(name: string): Promise<GetEmployeeService>;
 
-  createEmployee(employee: CreateEmployee): Promise<GetEmployeeService>;
+  createEmployee(name: string): Promise<GetEmployeeService>;
 
   updateEmployee(
     id: number,

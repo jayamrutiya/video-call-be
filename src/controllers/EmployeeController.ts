@@ -23,9 +23,9 @@ export default class EmployeeController extends BaseController {
       // validate input
       this.validateRequest(req);
 
-      const id = Number(req.params.id);
+      const name = req.body.name;
 
-      const employee = await this._employeeService.getEmployee(id);
+      const employee = await this._employeeService.getEmployee(name);
 
       // Return the response
       return this.sendJSONResponse(
@@ -46,16 +46,12 @@ export default class EmployeeController extends BaseController {
       // validate input
       this.validateRequest(req);
 
-      const employee: CreateEmployee = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        emailId: req.body.emailId,
-        phoneNumber: req.body.phoneNumber,
-        isActive: req.body.isActive,
+      const employee = {
+        name: req.body.name,
       };
 
       const createEmployee = await this._employeeService.createEmployee(
-        employee
+        employee.name
       );
 
       // Return the response
