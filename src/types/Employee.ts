@@ -2,6 +2,7 @@ export declare type GetEmployeeService = {
   id: number;
   email: string;
   name: string | null;
+  userUuid: string | null;
   createdAt: Date;
 };
 

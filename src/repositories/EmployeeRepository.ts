@@ -11,6 +11,7 @@ import {
   GetEmployeeService,
   UpdateEmployee,
 } from "../types/Employee";
+import { v4 as uuidv4 } from "uuid";
 
 @injectable()
 export class EmployeeRepository implements IEmployeeRepository {
@@ -58,6 +59,7 @@ export class EmployeeRepository implements IEmployeeRepository {
         data: {
           name,
           email: "test@yopmail.com",
+          userUuid: uuidv4(),
         },
       });
     } catch (error) {
@@ -89,6 +91,7 @@ export class EmployeeRepository implements IEmployeeRepository {
         createdAt: new Date(),
         name: employee.firstName,
         email: employee.emailId,
+        userUuid: null,
       };
     } catch (error) {
       this._loggerService.getLogger().error(`Error ${error}`);
