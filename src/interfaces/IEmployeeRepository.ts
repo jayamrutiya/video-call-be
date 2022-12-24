@@ -13,4 +13,6 @@ export interface IEmployeeRepository {
     id: number,
     employee: UpdateEmployee
   ): Promise<GetEmployeeService>;
+
+  getEmployeeById(userUuid: string): Promise<GetEmployeeService | null>;
 }

@@ -14,6 +14,7 @@ const employeeController = new EmployeeController(
   employeeService
 );
 
+router.get("/emp", (req, res) => employeeController.getEmployeeById(req, res));
 router.post("/", (req, res) => employeeController.createEmployee(req, res));
 router.post("/login", (req, res) => employeeController.getEmployee(req, res));
 

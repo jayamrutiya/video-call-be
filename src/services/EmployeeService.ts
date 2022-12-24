@@ -25,6 +25,10 @@ export class EmployeeService implements IEmployeeService {
     this._loggerService.getLogger().info(`Creating: ${this.constructor.name}`);
   }
 
+  getEmployeeById(userUuid: string): Promise<GetEmployeeService | null> {
+    return this._employeeRepository.getEmployeeById(userUuid);
+  }
+
   async getEmployee(name: string): Promise<GetEmployeeService> {
     let getUser = await this._employeeRepository.getEmployee(name);
     if (getUser === null) {

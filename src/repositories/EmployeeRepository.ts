@@ -27,6 +27,31 @@ export class EmployeeRepository implements IEmployeeRepository {
     this._loggerService.getLogger().info(`Creating: ${this.constructor.name}`);
   }
 
+  async getEmployeeById(userUuid: string): Promise<GetEmployeeService | null> {
+    try {
+      // Get the database client
+      const client = this._databaseService.Client();
+
+      const getUser = await client.user.findFirst({
+        where: {
+          userUuid,
+        },
+      });
+
+      console.log("getUser", getUser);
+
+      return getUser;
+    } catch (error) {
+      this._loggerService.getLogger().error(`Error ${error}`);
+
+      throw new InternalServerError(
+        "An error occurred while interacting with the database."
+      );
+    } finally {
+      // await this._databaseService.disconnect();
+    }
+  }
+
   async getEmployee(name: string): Promise<GetEmployeeService | null> {
     try {
       // Get the database client

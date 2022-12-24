@@ -18,6 +18,31 @@ export default class EmployeeController extends BaseController {
     this._loggerService.getLogger().info(`Creating: ${this.constructor.name}`);
   }
 
+  async getEmployeeById(req: express.Request, res: express.Response) {
+    try {
+      // validate input
+      this.validateRequest(req);
+
+      const name = req.query.uuid?.toString();
+
+      const employee = await this._employeeService.getEmployeeById(
+        name ? name : "test"
+      );
+
+      // Return the response
+      return this.sendJSONResponse(
+        res,
+        "Get Employee.",
+        {
+          size: 1,
+        },
+        employee
+      );
+    } catch (error) {
+      return this.sendErrorResponse(req, res, error);
+    }
+  }
+
   async getEmployee(req: express.Request, res: express.Response) {
     try {
       // validate input
