@@ -1,4 +1,4 @@
-Steps to setup projects
+Steps to setup project
 
 1. npm install
 2. install mysql in your system
